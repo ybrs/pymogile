@@ -3,7 +3,7 @@ import time
 import random
 from cStringIO import StringIO
 from nose import with_setup
-from mogilefs import Client, Admin, MogileFSError
+from pymogile import Client, Admin, MogileFSError
 
 TEST_NS = "mogilefs.client::test_client"
 HOSTS   = ["127.0.0.1:7001"]

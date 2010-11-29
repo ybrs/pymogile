@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from mogilefs import Client, Admin, MogileFSError
+from pymogile import Admin, MogileFSError
 
 DOMAIN   = "testdomain"
 CLASS    = "testclass"

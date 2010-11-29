@@ -3,7 +3,7 @@ from __future__ import with_statement
 
 import time, random
 from nose import with_setup
-from mogilefs import Client, Admin
+from pymogile import Client, Admin
 
 TEST_NS = "mogilefs.client::test_client"
 HOSTS   = ["127.0.0.1:7001"]
