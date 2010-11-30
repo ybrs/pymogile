@@ -1,7 +1,8 @@
-#Mon Nov 29 22:20:01 ICT 2010
+#Tue Nov 30 10:34:09 ICT 2010
 eclipse.preferences.version=1
 encoding//pymogile/__init__.py=utf-8
 encoding//pymogile/admin.py=utf-8
+encoding//pymogile/backend.py=utf-8
 encoding//pymogile/client.py=utf-8
 encoding//pymogile/exceptions.py=utf-8
 encoding//pymogile/http.py=utf-8

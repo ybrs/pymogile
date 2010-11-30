@@ -258,7 +258,7 @@ class Client(object):
     return len(content)
 
   def delete(self, key):
-    """ Delete a key from pymogile """
+    """ Delete a file from MogileFS """
     _complain_ifreadonly(self.readonly)
     self.backend.do_request('delete', {'domain': self.domain, 'key': key})
     return True
