@@ -21,15 +21,21 @@ class Admin(object):
 
   def get_hosts(self, hostid=None):
     if hostid:
-      params = { 'hostid': hostid }
+      params = {'hostid': hostid}
     else:
       params = None
     res = self.backend.do_request("get_hosts", params)
-    return res
+    ret = []
+    fields = "hostid status hostname hostip http_port".split()
+    hosts = int(res['hosts']) + 1
+    for ct in xrange(1, hosts):
+        ret.append(dict([ (f, res['host%d_%s' % (ct, f)]) for f in fields]))
+
+    return ret
 
   def get_devices(self, devid=None):
     if devid:
-      params = { 'devid': devid }
+      params = {'devid': devid}
     else:
       params = None
     res = self.backend.do_request("get_devices", params)
@@ -47,6 +53,10 @@ class Admin(object):
           device[k] = None
       ret.append(device)
     return ret
+
+  def get_freespace(self, devid=None):
+    """Get the free space for the entire cluster, or a specific node"""
+    return sum([x['mb_free'] for x in  self.get_devices(devid)])
 
   def list_fids(self, fromfid, tofid):
     """

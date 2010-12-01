@@ -11,7 +11,7 @@ from errno import EINPROGRESS, EISCONN
 
 from pymogile.exceptions import MogileFSTrackerError
 
-logger = logging.getLogger('mobilefs.backend')
+logger = logging.getLogger('mogilefs.backend')
 
 PROTO_TCP = socket.getprotobyname('tcp')
 MSG_NOSIGNAL  = 0x4000

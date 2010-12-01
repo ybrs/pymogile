@@ -2,6 +2,8 @@
 """
 implement from description of MogileFS-Client version 1.13
 http://search.cpan.org/~dormando/MogileFS-Client/lib/MogileFS/Client.pm
+
+This module is a client library for the MogileFS distributed file system
 """
 import logging
 
@@ -107,6 +109,10 @@ class Client(object):
     return ClientHttpFile(path=path, backup_dests=backup_dests, readonly=1)
 
   def get_paths(self, key, noverify=1, zone='alt', pathcount=None):
+    """ 
+    Given a key, returns an array of all the locations (HTTP URLs) that the file 
+    has been replicated to.
+    """
     self.run_hook('get_paths_start', key)
 
     if not pathcount:
