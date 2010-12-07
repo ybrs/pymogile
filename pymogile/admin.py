@@ -30,7 +30,6 @@ class Admin(object):
     hosts = int(res['hosts']) + 1
     for ct in xrange(1, hosts):
         ret.append(dict([ (f, res['host%d_%s' % (ct, f)]) for f in fields]))
-
     return ret
 
   def get_devices(self, devid=None):
@@ -185,17 +184,15 @@ class Admin(object):
     return res['class'] == cls
 
   def create_host(self, host, ip, port, status=None):
-    params = { 'host': host,
-           'ip'  : ip,
-           'port': port,
-           }
+    params = {'host': host,
+              'ip'  : ip,
+              'port': port}
     if status:
       params['status'] = status
     return self._modify_host('create', params)
 
   def update_host(self, host, ip=None, port=None, status=None):
-    params = { 'host': host,
-           }
+    params = {'host': host}
     if ip:
       params['ip'] = ip
     if port:
@@ -208,9 +205,8 @@ class Admin(object):
     self.backend.do_request("delete_host", { 'host': host })
 
   def create_device(self, hostname, devid, hostip=None, state=None):
-    params = { 'hostname': hostname,
-           'devid'   : devid,
-           }
+    params = {'hostname': hostname,
+              'devid'   : devid}
     if hostip:
       params['hostip'] = hostip
     if state:
