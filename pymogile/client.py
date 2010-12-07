@@ -24,6 +24,12 @@ class Client(object):
     self.domain   = domain
     self.backend  = Backend(hosts, timeout=3)
 
+  def run_hook(self, hookname, *args):
+    pass
+
+  def add_hook(self, hookname, *args):
+    pass
+
   @property
   def last_tracker(self):
     """
