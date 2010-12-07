@@ -10,10 +10,10 @@ Programming Language :: Python
 Topic :: Software Development :: Libraries :: Python Modules
 """
 
-setup(name='mogilefs',
+setup(name='pymogile',
       version=version,
-      description="mogilefs",
-      long_description="""mogilefs""",
+      description="pymongile",
+      long_description="""Python MogileFS Client""",
       classifiers=filter(None, map(str.strip, CLASSIFIERS.splitlines())),
       keywords='',
       author='Chihio Sakatoku',
