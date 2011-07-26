@@ -16,7 +16,7 @@ class Client(object):
     """Create new Client object with the given list of trackers."""
     self.readonly = bool(readonly)
     self.domain = domain
-    self.backend = Backend(trackers, timeout=3)
+    self.backend = Backend(trackers, timeout=30)
 
   def run_hook(self, hookname, *args):
     pass
@@ -140,7 +140,7 @@ class Client(object):
     return LargeHTTPFile(path=path, backup_dests=backup_dests, readonly=1)
 
 
-  def store_file(self, key, fp, cls=None, chunk_size=8192):
+  def store_file(self, key, fp, cls=None, chunk_size=8192, progress_callback=None):
     """
     Wrapper around new_file, print, and close.
 
@@ -150,22 +150,19 @@ class Client(object):
     """
     if self.readonly:
       return False
-
     params = {}
     if chunk_size:
       params['chunk_size'] = chunk_size
     if cls:
       params['class'] = cls
     params[key] = key
-
     self.run_hook('store_file_start', params)
-
     try:
       new_file = self.new_file(key, cls)
-    except MogileFSError:
+    except MogileFSError, e:
+      print "Exception", e
       fp.close()
       return False
-    
     try:
       _bytes = 0
       while True:
@@ -174,7 +171,8 @@ class Client(object):
           break
         _bytes += len(buf)
         new_file.write(buf)
-
+        if progress_callback:
+            progress_callback(key, _bytes)
       self.run_hook('store_file_end', params)
     finally:
       fp.close()
